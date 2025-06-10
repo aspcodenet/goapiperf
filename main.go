@@ -9,7 +9,6 @@ import (
 )
 
 func jsondeserialize() (response Response) {
-	// JSON-data (förkortad för exempel)
 	jsonData := `{
 		"took": 18,
 		"timed_out": false,
@@ -87,40 +86,22 @@ func jsondeserialize() (response Response) {
 	}
 	return response
 
-	// Exempel på hur man kommer åt data
-	// fmt.Printf("Took: %d ms\n", response.Took)
-	// fmt.Printf("Total hits: %d\n", response.Hits.Total.Value)
-	// fmt.Printf("First product title: %s\n", response.Hits.Hits[0].Source.Title)
-	// fmt.Printf("First category facet: %s (%d documents)\n",
-	// 	response.Aggregations.Facets.Names.Buckets[0].Values.Buckets[0].Key,
-	// 	response.Aggregations.Facets.Names.Buckets[0].Values.Buckets[0].DocCount)
 }
 
 func getSinglePlayer(c *gin.Context) {
-	// This function will handle fetching a single player by ID
 	resp := jsondeserialize()
-	time.Sleep(10 * time.Millisecond) // Simulate a delay
+	time.Sleep(10 * time.Millisecond) // Simulate a delay - anropa en databas
 	playerID := c.Param("id")
 	resp.Hits.Hits[0].ID = playerID
 	c.JSON(200, resp.Hits.Hits[0])
 }
 
 func getAllPlayers(c *gin.Context) {
-	// This function will handle fetching a single player by ID
 	resp := jsondeserialize()
-	time.Sleep(10 * time.Millisecond) // Simulate a delay
-	fibonacciIterative(20)
+	time.Sleep(10 * time.Millisecond) //  Simulate a delay - anropa en databas
+	fibonacciIterative(50)
 	c.JSON(200, resp)
 }
-
-// func updatePlayer(c *gin.Context) {
-// 	// This function will handle updating a player by ID
-// 	playerID := c.Param("id")
-// 	c.JSON(200, gin.H{a
-// 		"message": "Player updated successfully",
-// 		"id":      playerID,
-// 	})
-// }
 
 func fibonacciIterative(n int) int {
 	if n <= 1 {
@@ -134,7 +115,6 @@ func fibonacciIterative(n int) int {
 }
 
 func main() {
-	// Initialize the application
 	router := gin.Default()
 
 	router.GET("/", func(c *gin.Context) {
